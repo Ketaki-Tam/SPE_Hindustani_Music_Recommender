@@ -1,0 +1,21 @@
+.login-signup-container {
+  margin: 50px auto;
+  width: 300px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+}
+
+.login-signup-container h2 {
+  text-align: center;
+}
+
+.login-signup-container form div {
+  margin: 10px 0;
+}
+
+.main-page {
+  text-align: center;
+  margin-top: 50px;
+}

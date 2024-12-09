@@ -1,0 +1,93 @@
+/* General Styles */
+.App {
+  text-align: center;
+  font-family: Arial, sans-serif;
+  background-color: #073b3a; /* Dark green background */
+  color: #fff; /* White text */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.header {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Box Container */
+.top-box-container {
+  display: flex;
+  justify-content: space-between;
+  width: 80%;
+  margin-bottom: 20px;
+}
+
+.left-box,
+.right-box {
+  width: 45%;
+  background-color: #1b5e57; /* Medium green */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.bottom-box {
+  width: 80%;
+  background-color: #1b5e57; /* Medium green */
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Input and Button Styles */
+.input-container {
+  margin-top: 20px;
+}
+
+.input-box {
+  width: 80%;
+  padding: 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  color: #073b3a;
+  background-color: rgb(169, 227, 169);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: rgb(145, 227, 145);
+  color: #fff;
+}
+
+/* Audio List */
+.bottom-box div {
+  text-align: left;
+  margin: 10px 0;
+}
+
+.bottom-box button {
+  margin-left: 10px;
+  padding: 5px 10px;
+  font-size: 14px;
+  color: #073b3a;
+  background-color: rgb(169, 227, 169);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.bottom-box button:hover {
+  background-color: rgb(145, 227, 145);
+  color: #fff;
+}
