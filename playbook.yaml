@@ -1,0 +1,35 @@
+---
+- name: Deploy Kubernetes resources with kubectl
+  hosts: localhost
+  become: no
+  gather_facts: no
+
+  vars:
+    kubeconfig_path: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/SPE_Hindustani_Music_Recommender/kubeconfig"  # Update this path as necessary
+    kubernetes_deployment_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/SPE_Hindustani_Music_Recommender/kubernetes-deployment.yaml"  # Path to your Kubernetes deployment YAML
+
+  tasks:
+    - name: Ensure kubectl is available
+      command: kubectl version --client
+      register: kubectl_version
+      failed_when: kubectl_version.rc != 0
+      changed_when: false
+
+    - name: Apply Kubernetes deployment YAML
+      shell: |
+        export KUBECONFIG={{ kubeconfig_path }}
+        kubectl apply -f {{ kubernetes_deployment_file }} --validate=false
+      args:
+        chdir: /var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/SPE_Hindustani_Music_Recommender/  # Adjust this path if needed
+
+    - name: Verify Kubernetes deployment
+      shell: |
+        export KUBECONFIG={{ kubeconfig_path }}
+        kubectl get deployments
+      register: kubectl_deployments
+      failed_when: kubectl_deployments.rc != 0
+      changed_when: false
+
+    - name: Print Kubernetes deployments
+      debug:
+        msg: "{{ kubectl_deployments.stdout }}"
