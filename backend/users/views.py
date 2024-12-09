@@ -7,7 +7,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
 
-#function to register a user
+#function to register a an user
 def register(request):
     if request.method == 'POST':
         form = UserCreationForm(request.POST)
