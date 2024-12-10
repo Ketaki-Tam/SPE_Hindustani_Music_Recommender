@@ -1,12 +1,12 @@
 ---
-- name: Deploy Kubernetes resources with kubectl
+- name: Deploy Kubernetes resources and manage port forwarding
   hosts: localhost
   become: no
   gather_facts: no
 
   vars:
-    kubeconfig_path: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubeconfig"  # Update this path as necessary
-    kubernetes_deployment_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-deployment.yaml"  # Path to your Kubernetes deployment YAML
+    kubeconfig_path: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubeconfig"
+    kubernetes_deployment_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-deployment.yaml"
 
   tasks:
     - name: Ensure kubectl is available
@@ -20,7 +20,7 @@
         export KUBECONFIG={{ kubeconfig_path }}
         kubectl apply -f {{ kubernetes_deployment_file }} --validate=false
       args:
-        chdir: /var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/  # Adjust this path if needed
+        chdir: /var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/
 
     - name: Verify Kubernetes deployment
       shell: |
@@ -33,3 +33,24 @@
     - name: Print Kubernetes deployments
       debug:
         msg: "{{ kubectl_deployments.stdout }}"
+
+    - name: Port forward Grafana
+      shell: |
+        export KUBECONFIG={{ kubeconfig_path }}
+        kubectl port-forward --namespace monitoring service/loki-grafana 3000:80 &
+      async: 10
+      poll: 0
+
+    - name: Port forward Prometheus
+      shell: |
+        export KUBECONFIG={{ kubeconfig_path }}
+        kubectl port-forward --namespace monitoring svc/loki-prometheus-server 9090:80 &
+      async: 10
+      poll: 0
+
+    - name: Port forward Loki
+      shell: |
+        export KUBECONFIG={{ kubeconfig_path }}
+        kubectl port-forward svc/loki -n monitoring 3100:3100 &
+      async: 10
+      poll: 0
