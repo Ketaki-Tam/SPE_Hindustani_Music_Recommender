@@ -18,7 +18,7 @@ from .utils import (
 )
 # import librosa
 
-# Global variable to hold similarity data in memory
+# Global variable to hold similarity data in Memory
 metadata = None
 user_id = 1
 
