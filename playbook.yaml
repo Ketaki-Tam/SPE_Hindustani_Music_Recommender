@@ -5,7 +5,7 @@
   gather_facts: no
 
   vars:
-    kubeconfig_path: "/var/lib/jenkins/workspace/kubeconfig"  # Update this path as necessary
+    kubeconfig_path: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubeconfig"  # Update this path as necessary
     kubernetes_deployment_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-deployment.yaml"  # Path to your Kubernetes deployment YAML
 
   tasks:
