@@ -207,6 +207,39 @@ def get_artist_rec(request):
         rec_list.append(audio_details(tuple[1]))
     return JsonResponse({'recommendations': rec_list})
 
+def generate_signed_url(request):
+    file_name = request.GET.get('file')
+    if not file_name:
+        return JsonResponse({"error": "File name is required"}, status=400)
+
+    # Retrieve the bucket name and API key from environment variables
+    storj_bucket_name = os.getenv("STORJ_BUCKET_NAME")
+    storj_api_key = os.getenv("STORJ_API_KEY")
+
+    if not storj_bucket_name or not storj_api_key:
+        return JsonResponse({"error": "Missing Storj credentials"}, status=500)
+
+    # Construct the API endpoint to generate a signed URL
+    url = f"https://api.storj.io/v1/buckets/{storj_bucket_name}/objects/{file_name}/download"
+
+    # Define the headers with the API key
+    headers = {
+        "Authorization": f"Bearer {storj_api_key}",
+    }
+
+    # Prepare the expiration time (1 hour)
+    expiration_time = 3600
+
+    # Request signed URL from Storj
+    params = {"expires": expiration_time}
+    response = requests.get(url, headers=headers, params=params)
+
+    if response.status_code == 200:
+        signed_url = response.json().get("url")
+        return JsonResponse({"signedUrl": signed_url})
+    else:
+        return JsonResponse({"error": "Failed to generate signed URL", "details": response.text}, status=500)
+
 # # Expose 'getAudioDetails' as a view
 # def get_audio_details(request):
 #     audio_id = request.GET.get('audio_id')
