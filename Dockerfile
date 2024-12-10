@@ -14,5 +14,8 @@ COPY . /app/
 # Expose the port
 EXPOSE 8000
 
+#Run tests
+RUN python manage.py test
+
 # Run the server
 CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
