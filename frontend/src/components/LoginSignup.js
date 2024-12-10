@@ -39,6 +39,49 @@ const LoginSignup = () => {
     }
   };
 
+  const handleSubmit = async (e) => {
+    e.preventDefault(); // Prevent form submission
+  
+    if (isLogin) {
+      // Call authenticateUser (not shown here) for login logic
+      if (await authenticateUser(username, password)) {
+        navigate("/main"); // Redirect on successful login
+      } else {
+        alert("Authentication failed! Please try again.");
+        setUsername("");
+        setPassword("");
+      }
+    } else {
+      // Signup logic
+      try {
+        const response = await fetch("http://192.168.49.2:32001/api/register/", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: username,
+            password: password,
+            raag: raag,
+            artist: artist,
+          }),
+        });
+  
+        if (response.ok) {
+          const data = await response.json();
+          alert("Signup successful! Now log in with your new credentials.");
+          setIsLogin(true); // Switch to login mode
+        } else {
+          const errorData = await response.json();
+          alert("Signup failed");
+        }
+      } catch (error) {
+        console.error("Error during signup:", error);
+        alert("An error occurred while signing up. Please try again.");
+      }
+    }
+  };
+
 
   return (
     <div className="login-signup-wrapper">
