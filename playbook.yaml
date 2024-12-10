@@ -1,5 +1,5 @@
 ---
-- name: Deploy Kubernetes resources with kubectl
+- name: Deploy Kubernetes resources and monitoring stack
   hosts: localhost
   become: no
   gather_facts: no
@@ -33,3 +33,56 @@
     - name: Print Kubernetes deployments
       debug:
         msg: "{{ kubectl_deployments.stdout }}"
+
+    # ADDITIONS START HERE
+
+    - name: Add Grafana Helm repository
+      shell: helm repo add grafana https://grafana.github.io/helm-charts
+      register: helm_repo_add
+      failed_when: helm_repo_add.rc != 0
+      changed_when: false
+
+    - name: Deploy Loki Stack with Prometheus, Loki, and Grafana
+      shell: |
+        helm install loki grafana/loki-stack \
+          --namespace monitoring \
+          --create-namespace \
+          --set loki.image.tag=2.9.3 \
+          --set promtail.enabled=true \
+          --set promtail.config.server.http_listen_port=3101 \
+          --set promtail.config.clients[0].url=http://loki:3100/loki/api/v1/push \
+          --set promtail.config.positions.filename=/run/promtail/positions.yaml \
+          --set grafana.enabled=true \
+          --set prometheus.enabled=true
+      register: helm_install_loki
+      failed_when: helm_install_loki.rc != 0
+      changed_when: false
+
+    - name: Forward Grafana port (3000:80)
+      shell: |
+        kubectl port-forward --namespace monitoring service/loki-grafana 3000:80 &
+      async: 10
+      poll: 0
+
+    - name: Forward Prometheus port (9090:80)
+      shell: |
+        kubectl port-forward --namespace monitoring svc/loki-prometheus-server 9090:80 &
+      async: 10
+      poll: 0
+
+    - name: Forward Loki port (3100:3100)
+      shell: |
+        kubectl port-forward svc/loki -n monitoring 3100:3100 &
+      async: 10
+      poll: 0
+
+    - name: Get Grafana admin password
+      shell: |
+        kubectl get secret loki-grafana -n monitoring -o jsonpath="{.data.admin-password}" | base64 --decode
+      register: grafana_password
+      failed_when: grafana_password.rc != 0
+      changed_when: false
+
+    - name: Print Grafana admin password
+      debug:
+        msg: "Grafana admin password: {{ grafana_password.stdout }}"
