@@ -54,7 +54,7 @@ const LoginSignup = () => {
     } else {
       // Signup logic
       try {
-        const response = await fetch("http://localhost:8000/api/register/", {
+        const response = await fetch("http://192.168.49.2:32001/api/register/", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
