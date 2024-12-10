@@ -22,6 +22,7 @@ simM = np.concatenate([simM, zero_row], axis=0)  # Add row
 simM = np.concatenate([simM, zero_col], axis=1)  # Add column
 
 
+
 def artist_map(artist_map_file_name):
     # Read the CSV file into a pandas DataFrame
     df = pd.read_csv(artist_map_file_name)   #'/kaggle/input/artist-map/artist-map-3.csv'
@@ -38,6 +39,8 @@ def artist_map(artist_map_file_name):
     return artist_dict
 
 artist_dict = artist_map("backend/data/artist-map.csv")
+
+revartist_dict = {value: key for key, value in artist_dict.items()}
 
 def get_audio_similarities(audio_sim_json):
     # Load JSON data from file
@@ -411,5 +414,5 @@ def getAudio(metaID):
         print(f"Error playing audio: {e}")
     
 
-revartist_dict = {value: key for key, value in artist_dict.items()}
+
 

@@ -1,0 +1,76 @@
+.login-signup-wrapper {
+    font-family: Arial, sans-serif;
+    background-color: #4ca394;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+  }
+  
+  .login-signup-wrapper h1 {
+    color: white;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .login-signup-wrapper .card {
+    background-color: #d9d9d9;
+    padding: 20px 30px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-signup-wrapper h2 {
+    margin-bottom: 15px;
+    color: #2e4f4f;
+  }
+  
+  .login-signup-wrapper .form-group {
+    margin-bottom: 15px;
+    text-align: left;
+  }
+  
+  .login-signup-wrapper label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .login-signup-wrapper input,
+  .login-signup-wrapper select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .login-signup-wrapper button {
+    cursor: pointer;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    font-size: 16px;
+  }
+  
+  .login-signup-wrapper .primary-button {
+    background-color: #134e4a;
+    color: white;
+    margin: 10px 5px;
+  }
+  
+  .login-signup-wrapper .secondary-button {
+    background-color: white;
+    color: #134e4a;
+    margin: 10px 5px;
+    border: 1px solid #134e4a;
+  }
+  
+  .login-signup-wrapper .button-container {
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 15px;
+  }
+  

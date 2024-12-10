@@ -1,18 +1,12 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate instead of useHistory
+import { useNavigate } from "react-router-dom";
+import "./LoginSignup.css"; // Import the CSS file for styling
 
 const LoginSignup = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [raag, setRaag] = useState("");
-  const [artist, setArtist] = useState("");
-  const navigate = useNavigate(); 
-
-  // const authenticateUser = (username, password) => {
-  //   // Dummy authentication function
-  //   return true; // Always returns true for now
-  // };
+  const navigate = useNavigate(); // Hook for navigation
 
   const authenticateUser = async (username, password) => {
     console.log("in authenticate user");
@@ -46,80 +40,42 @@ const LoginSignup = () => {
   };
 
 
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    console.log("hi")
-    if (isLogin) {
-      console.log("isLogin");
-      const result = await authenticateUser(username, password);
-      if (result.authenticated) {
-        console.log("Redirecting to /main");
-        navigate("/main");
-        console.log("Redirection attempted"); // Redirect on successful login
-      } else {
-        alert(result.message);
-        setUsername("");
-        setPassword("");
-      }
-    } else {
-      alert("Signup functionality is not yet integrated.");
-      setIsLogin(true);
-    }
-  };
-
   return (
-    <div>
-      <h2>{isLogin ? "Login" : "Signup"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-
-        {!isLogin && (
-          <>
-            <div>
-              <label>Preferred Raag:</label>
-              <select value={raag} onChange={(e) => setRaag(e.target.value)} required>
-                <option value="Yaman">Yaman</option>
-                <option value="Todi">Todi</option>
-                <option value="Bhimpalasi">Bhimpalasi</option>
-              </select>
+    <div className="login-signup-wrapper">
+      <h1>Hindustani Classical Music Recommender</h1>
+      <div className="login-signup-container">
+        <div className="card">
+          <h2>{isLogin ? "Login" : "Signup"}</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Username:</label>
+              <input
+                type="text"
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+                required
+              />
             </div>
-
-            <div>
-              <label>Preferred Artist:</label>
-              <select value={artist} onChange={(e) => setArtist(e.target.value)} required>
-                <option value="Ajoy Chakraborty">Ajoy Chakraborty</option>
-                <option value="Kaushiki Chakraborty">Kaushiki Chakraborty</option>
-                <option value="Buddhadev Dasgupta">Buddhadev Dasgupta</option>
-              </select>
+            <div className="form-group">
+              <label>Password:</label>
+              <input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
-          </>
-        )}
-
-        <div>
-          <button type="submit">{isLogin ? "Login" : "Signup"}</button>
+            <div className="form-group">
+              <button type="submit" className="primary-button">
+                {isLogin ? "Login" : "Signup"}
+              </button>
+            </div>
+          </form>
+          <button className="secondary-button" onClick={() => setIsLogin(!isLogin)}>
+            Switch to {isLogin ? "Signup" : "Login"}
+          </button>
         </div>
-      </form>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        Switch to {isLogin ? "Signup" : "Login"}
-      </button>
+      </div>
     </div>
   );
 };
