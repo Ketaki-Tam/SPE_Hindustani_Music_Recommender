@@ -19,12 +19,15 @@ spec:
         ports:
         - containerPort: 8000
         volumeMounts:
-            - name: audio-storage
+            # - name: audio-storage
+            - name: local-audio-storage
               mountPath: /app/audio_files # Path in the container where audio files will be accessible
       volumes:
-        - name: audio-storage
+        # - name: audio-storage
+        - name: local-audio-storage
           persistentVolumeClaim:
-            claimName: audio-files-pvc # PVC that this Pod will use
+            # claimName: audio-files-pvc # PVC that this Pod will use
+            claimName: audio-storage-claims
         # env:
         # - name: STORJ_API_KEY
         #   valueFrom:
