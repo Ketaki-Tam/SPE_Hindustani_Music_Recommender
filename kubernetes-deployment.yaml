@@ -27,7 +27,7 @@ spec:
         - name: local-audio-storage
           persistentVolumeClaim:
             # claimName: audio-files-pvc # PVC that this Pod will use
-            claimName: audio-storage-claims
+            claimName: audio-storage-claim
         # env:
         # - name: STORJ_API_KEY
         #   valueFrom:
