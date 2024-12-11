@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-hb7n(#7@ta+7=m_ws2qdq@wu&0=ss+n24#nwz4b5gad$0!=_rz
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['10.101.74.91', 'backend-service.default.svc.cluster.local', '192.168.49.2']
+ALLOWED_HOSTS = ['10.101.74.91', 'backend-service.default.svc.cluster.local', '192.168.49.2','localhost']
 
 
 # Application definition
