@@ -41,7 +41,7 @@ function AudioPlayer({ audio }) {
           <p>{`Playing: ${meta.Name}`}</p>
           <audio controls ref={audioRef}>
             <source
-              src={'http://192.168.49.2:32001/api/get_audio/?file_name=${meta.Name}mp.mp3'}// Dynamically updated source
+              src={'http://192.168.49.2:32001/api/get-audio/?file_name=${meta.Name}mp.mp3'}// Dynamically updated source
               type="audio/mpeg"
             />
             Your browser does not support the audio element.
