@@ -23,6 +23,7 @@
         kubectl apply -f {{ kubernetes_pv_file }} --validate=false
         kubectl apply -f {{ kubernetes_pvc_file }} --validate=false
         kubectl apply -f {{ kubernetes_deployment_file }} --validate=false
+        kubectl rollout restart deployment backend-deployment
       args:
         chdir: /var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/
 
