@@ -17,17 +17,17 @@ spec:
         image: ketakitam/backend-image:latest  # Replace with your backend image
         ports:
         - containerPort: 8000
-        env:
-        - name: STORJ_API_KEY
-          valueFrom:
-            secretKeyRef:
-              name: vault-secret
-              key: STORJ_API_KEY
-        - name: STORJ_BUCKET_NAME
-          valueFrom:
-            secretKeyRef:
-              name: vault-secret
-              key: STORJ_BUCKET_NAME
+        # env:
+        # - name: STORJ_API_KEY
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: vault-secret
+        #       key: STORJ_API_KEY
+        # - name: STORJ_BUCKET_NAME
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: vault-secret
+        #       key: STORJ_BUCKET_NAME
 
 ---
 apiVersion: v1
