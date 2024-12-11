@@ -247,6 +247,7 @@ def generate_signed_url(request):
 #         return JsonResponse({'error': 'No audio_id provided'}, status=400)
 #     details = audio_details(audio_id)
 #     return JsonResponse({'audio_details': details})
+#yay
 
 AUDIO_DIR = '/app/audio_files'
 
