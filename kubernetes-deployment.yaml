@@ -17,6 +17,13 @@ spec:
         image: ketakitam/backend-image:latest  # Replace with your backend image
         ports:
         - containerPort: 8000
+        volumeMounts:
+            - name: audio-storage
+              mountPath: /app/audio_files # Path in the container where audio files will be accessible
+      volumes:
+        - name: audio-storage
+          persistentVolumeClaim:
+            claimName: audio-files-pvc # PVC that this Pod will use
         # env:
         # - name: STORJ_API_KEY
         #   valueFrom:

@@ -7,6 +7,8 @@
   vars:
     kubeconfig_path: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubeconfig"
     kubernetes_deployment_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-deployment.yaml"
+    kubernetes_pv_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-pv.yaml"
+    kubernetes_pvc_file: "/var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/kubernetes-pvc.yaml"
 
   tasks:
     - name: Ensure kubectl is available
@@ -18,6 +20,8 @@
     - name: Apply Kubernetes deployment YAML
       shell: |
         export KUBECONFIG={{ kubeconfig_path }}
+        kubectl apply -f {{ kubernetes_pv_file }} --validate=false
+        kubectl apply -f {{ kubernetes_pvc_file }} --validate=false
         kubectl apply -f {{ kubernetes_deployment_file }} --validate=false
       args:
         chdir: /var/lib/jenkins/workspace/Hindustani_Music_Recommender_Pipeline/

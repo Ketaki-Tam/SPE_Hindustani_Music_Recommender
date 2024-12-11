@@ -8,7 +8,7 @@ import json
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-from django.http import JsonResponse
+from django.http import FileResponse, JsonResponse
 from django.conf import settings
 from .utils import (
     giveRecsForNewVec as give_recs,
@@ -247,3 +247,12 @@ def generate_signed_url(request):
 #         return JsonResponse({'error': 'No audio_id provided'}, status=400)
 #     details = audio_details(audio_id)
 #     return JsonResponse({'audio_details': details})
+
+AUDIO_DIR = '/app/audio_files'
+
+def stream_audio_file(request):
+    file_name = request.GET.get('file_name')
+    file_path = os.path.join(AUDIO_DIR, file_name)
+    if os.path.exists(file_path):
+        return FileResponse(open(file_path, 'rb'), content_type='audio/mpeg')
+    return JsonResponse({"error": "File not found"}, status=404)

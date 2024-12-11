@@ -20,16 +20,16 @@ function AudioPlayer({ audio }) {
       audioRef.current.load();
 
       // Fetch signed URL
-      fetch(`/api/getSignedUrl?file=${meta.Name}mp.mp3`)
-        .then((response) => response.json())
-        .then((data) => {
-          if (data.signedUrl) {
-            setAudioUrl(data.signedUrl);
-          } else {
-            console.error("Error fetching signed URL:", data.error);
-          }
-        })
-        .catch((err) => console.error("Error fetching signed URL:", err));
+      // fetch(`/api/get_audio?file=${meta.Name}mp.mp3`)
+      //   .then((response) => response.json())
+      //   .then((data) => {
+      //     if (data.signedUrl) {
+      //       setAudioUrl(data.signedUrl);
+      //     } else {
+      //       console.error("Error fetching signed URL:", data.error);
+      //     }
+      //   })
+        // .catch((err) => console.error("Error fetching signed URL:", err));
     }
   }, [meta]); // Run this effect whenever `meta` changes
 
@@ -41,7 +41,7 @@ function AudioPlayer({ audio }) {
           <p>{`Playing: ${meta.Name}`}</p>
           <audio controls ref={audioRef}>
             <source
-              src={audioUrl} // Dynamically updated source
+              src={'http://192.168.49.2:32001/api/get_audio/?file_name=${meta.Name}mp.mp3'}// Dynamically updated source
               type="audio/mpeg"
             />
             Your browser does not support the audio element.
