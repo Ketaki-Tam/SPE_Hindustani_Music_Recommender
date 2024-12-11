@@ -10,7 +10,8 @@ spec:
     - ReadWriteOnce
   storageClassName: manual
   local:
-    path: /home/kt/Sem_6/RecSys/Project/darbar_audio
+    # path: /home/kt/Sem_6/RecSys/Project/darbar_audio
+    path: /app/audio_files
   nodeAffinity:
     required:
       nodeSelectorTerms:
