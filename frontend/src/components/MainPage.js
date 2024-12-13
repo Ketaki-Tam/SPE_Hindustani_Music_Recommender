@@ -51,7 +51,7 @@ function MainPage() {
     // setSelectedDropdownValue("");
 
     if (option === "Search by raag") {
-      setDropdownOptions(["Yaman", "Todi", "Bhimpalasi"]);
+      setDropdownOptions(["Yaman", "Todi", "Bhimpalasi", "Multani", "Shree", "Jog"]);
     } else if (option === "Search by artist") {
       setDropdownOptions(["Ajoy Chakraborty", "Shahid Parvez", "Omkar Dadarkar"]);
     }
