@@ -11,6 +11,9 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy project files
 COPY . /app/
 
+# Create the audio_files folder if it doesn't exist
+RUN mkdir -p /app/audio_files
+
 # Expose the port
 EXPOSE 8000
 
