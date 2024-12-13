@@ -35,7 +35,7 @@ function AudioPlayer({ audio }) {
 
   return (
     <div>
-      <h2>Now Playing</h2>
+      <h2>Now Playing:</h2>
       {meta ? (
         <>
           <p>{`Playing: ${meta.Name}`}</p>
