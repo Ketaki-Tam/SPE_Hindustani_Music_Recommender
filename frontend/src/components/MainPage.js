@@ -134,7 +134,7 @@ function MainPage() {
   return (
     <div className="App">
       {isModalOpen && <PreferencesModal onSavePreferences={handlePreferencesSubmit} />}
-      <h1 className="header">Hindustani Classical Music Recommender</h1>
+      <h1 className="header">Hindustani Classical Music Recommender System</h1>
       <div className="top-box-container">
         <div className="left-box">
           <OptionsSelector onSelect={handleOptionSelect} />
