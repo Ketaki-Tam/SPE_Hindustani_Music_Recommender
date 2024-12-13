@@ -16,6 +16,7 @@ spec:
       - name: backend
         image: ketakitam/backend-image:latest  # Replace with your backend image
         imagePullPolicy: Always
+        recreate: yes
         ports:
         - containerPort: 8000
         volumeMounts:
@@ -74,6 +75,7 @@ spec:
       - name: frontend
         image: ketakitam/frontend:latest  # Replace with your frontend image
         imagePullPolicy: Always
+        recreate: yes
         ports:
         - containerPort: 3000
 ---
