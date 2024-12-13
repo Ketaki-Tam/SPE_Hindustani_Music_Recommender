@@ -29,6 +29,7 @@ const PreferencesModal = ({ onSavePreferences }) => {
               <option value="Yaman">Yaman</option>
               <option value="Todi">Todi</option>
               <option value="Bhimpalasi">Bhimpalasi</option>
+              <option value="Jog">Bhimpalasi</option>
             </select>
           </label>
           <label>
@@ -38,8 +39,8 @@ const PreferencesModal = ({ onSavePreferences }) => {
                 Select an artist
               </option>
               <option value="Ajoy Chakraborty">Ajoy Chakraborty</option>
-              <option value="Shahid Parvez">Kaushiki Chakraborty</option>
-              <option value="Omkar Dadarkar">Buddhadev Dasgupta</option>
+              <option value="Shahid Parvez">Kaushiki Chakraborty Desikan</option>
+              <option value="Omkar Dadarkar">Shahid Parvez</option>
             </select>
           </label>
           <button type="submit">Submit</button>
